@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Concrete.EntityFramework;
+﻿
+using DataAccessLayer.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,38 +11,37 @@ namespace EntityLayer.Concrete
     
     public class CategoryManager : ICategoryService
     {
-        EfCategoryRepository _efCategoryRepository;
+        ICategoryDal _categoryDal;
 
-        public CategoryManager(EfCategoryRepository efCategoryRepository)
+        public CategoryManager(ICategoryDal categoryDal)
         {
-            _efCategoryRepository = efCategoryRepository;
+            _categoryDal = categoryDal;
         }
 
         public void CategoryAdd(Category category)
         {
-
-            _efCategoryRepository.Insert(category);
+            _categoryDal.Insert(category);
         }
 
         public void CategoryDelete(Category category)
         {
 
-           _efCategoryRepository.Delete(category);  
+            _categoryDal.Delete(category);  
         }
 
         public void CategoryUpdate(Category category)
         {
-            _efCategoryRepository.Update(category);
+            _categoryDal.Update(category);
         }
 
         public Category GetById(int Id)
         {
-            return _efCategoryRepository.GetById(Id);
+            return _categoryDal.GetById(Id);
         }
 
         public List<Category> GetList()
         {
-            return _efCategoryRepository.GetListAll();
+            return _categoryDal.GetListAll();
         }
     }
 }
